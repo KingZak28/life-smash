@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Smash MVP</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle at top, #7dd3fc, #1e3a8a 65%);
+      }
+      .card {
+        width: min(90vw, 560px);
+        padding: 1.2rem;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      }
+      h1 { margin-top: 0; }
+      .row { display: flex; gap: 0.5rem; }
+      input {
+        flex: 1;
+        padding: 0.6rem 0.7rem;
+        border-radius: 10px;
+        border: none;
+      }
+      button {
+        padding: 0.6rem 0.9rem;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      ul { padding-left: 1.2rem; }
+      li { margin: 0.4rem 0; }
+      .hint { opacity: 0.85; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Life Smash MVP</h1>
+      <p class="hint">Small momentum tracker: add tasks, complete them, keep moving.</p>
+      <div class="row">
+        <input id="taskInput" placeholder="What will you smash today?" />
+        <button id="addBtn">Add</button>
+      </div>
+      <ul id="taskList"></ul>
+    </main>
+    <script>
+      const input = document.getElementById('taskInput');
+      const list = document.getElementById('taskList');
+      const addBtn = document.getElementById('addBtn');
+
+      function addTask() {
+        const value = input.value.trim();
+        if (!value) return;
+        const li = document.createElement('li');
+        li.innerHTML = `<label><input type="checkbox" /> ${value}</label>`;
+        list.appendChild(li);
+        input.value = '';
+      }
+
+      addBtn.addEventListener('click', addTask);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') addTask();
+      });
+    </script>
+  </body>
+</html>
